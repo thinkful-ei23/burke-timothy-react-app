@@ -8,10 +8,15 @@ export default class Input extends React.Component {
     }
   }
 
+  clearInput() {
+    this.setState({input: ''})
+  }
+
   handleSubmit(e, time) {
     e.preventDefault();
     this.props.setCountdown();
-    this.props.setTime(time, 'started');
+    this.props.setTime(time);
+    this.clearInput();
   }
 
   handleInput(input) {
@@ -22,7 +27,7 @@ export default class Input extends React.Component {
   return (
     <form className="input" onSubmit={(e) => this.handleSubmit(e, this.state.input)}>
       <label htmlFor="input">Set timer</label>
-      <input onChange={(e) => this.handleInput(e.target.value)} id="input" type="number" />
+      <input onChange={(e) => this.handleInput(e.target.value)} value={this.state.input} id="input" type="number" />
       <input type="submit" value="Start timer" />
     </form>
   );

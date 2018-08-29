@@ -4,8 +4,7 @@ export default function Clear(props) {
 
   function clearCountdown () {
     props.pauseCountdown();
-    props.setTime(0, 'stopped');
-
+    props.setTime(0);
   }
     return (
       <button onClick={() => clearCountdown()}>Clear</button>

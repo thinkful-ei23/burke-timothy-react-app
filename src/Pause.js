@@ -1,18 +1,29 @@
 import React from 'react';
 
-export default function Button(props) {
-  let count = 0;
-  // only works if countdown has started 
-  function toggle () {
-    if (count % 2 === 0) {
-      props.pauseCountdown();
-    } else {
-      props.setCountdown();
-    }
-    count++;
+export default class Button extends React.Component {
+  // change to class, set count into the state
+  constructor(props) {
+    super(props);
+    this.state = {count: 0}
+  }
+  
+  iterateState (newCount) {
+    this.setState({count: newCount})
   }
 
+  // only works if countdown has started 
+  toggle () {
+    if (this.state.count % 2 === 0) {
+      this.props.pauseCountdown();
+    } else {
+      this.props.setCountdown();
+    }
+    this.iterateState(this.state.count + 1);
+  }
+  
+  render() {
     return (
-      <button onClick={() => toggle()}>Pause</button>
+      <button onClick={() => this.toggle()}>Pause</button>
     );
+  }
 }

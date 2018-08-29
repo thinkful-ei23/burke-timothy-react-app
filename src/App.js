@@ -10,12 +10,11 @@ export default class App extends React.Component {
     this.state = 
     { 
       currentTime: 0,
-      countDownStatus: 'stopped' 
     };
   }
 
-  setTime(currentTime, countDownStatus) {
-    this.setState({ currentTime, countDownStatus });
+  setTime(currentTime){
+    this.setState({currentTime});
   }
 
   setCountdown() {
@@ -45,7 +44,7 @@ export default class App extends React.Component {
         <Timer currentTime={this.state.currentTime} />
         <Input setCountdown={() => this.setCountdown()} setTime={currentTime => this.setTime(currentTime)} />
         <Pause setCountdown={() => this.setCountdown()} pauseCountdown={() => this.pauseCountDown()} />
-        <Clear pauseCountdown={() => this.pauseCountDown()} setTime={currentTime => this.setTime(currentTime)} />
+        <Clear pauseCountdown={() => this.pauseCountDown()}  setTime={currentTime => this.setTime(currentTime)} />
       </div>
     );
   }
