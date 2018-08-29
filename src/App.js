@@ -12,25 +12,32 @@ export default class App extends React.Component {
     this.setState({ currentTime });
   }
 
-  countDown() {
-    const currentTime = (() => this.state.currentTime);
-    while (currentTime > 0) {
-        setInterval(() => {
-          console.log('setting new time');
-          let newCurrentTime = this.state.currentTime - 1;
-          this.setState({
-            currentTime: newCurrentTime >= 0 ? newCurrentTime : 0
-          });
-        }, 1000)
-      }
+  setCountdown() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  clearCountDown() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      currentTime: this.state.currentTime - 1
+    });
   }
 
   render() {
-
+    if (this.state.currentTime === 0) {
+      this.clearCountDown();
+    }
+     
     return (
       <div>
         <Timer currentTime={this.state.currentTime} />
-        <Input startCountdown={() => this.countDown()} setTime={currentTime => this.setTime(currentTime)} />
+        <Input setCountdown={() => this.setCountdown()} setTime={currentTime => this.setTime(currentTime)} />
       </div>
     );
   }
