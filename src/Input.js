@@ -1,15 +1,11 @@
-'use strict';
-
 import React from 'react';
 
-export default function Input(){
-
+export default function Input() {
   return (
-    <form className="input">
+    <form className="input" onSubmit>
       <label htmlFor="input">Set timer</label>
-      <input id="input" type="text"></input>
-      <input type="submit" value="Start timer"></input>
+      <input id="input" type="number" />
+      <input type="submit" value="Start timer" />
     </form>
-  )
-
+  );
 }
