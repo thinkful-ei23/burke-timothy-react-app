@@ -11,6 +11,7 @@ export default class Input extends React.Component {
   handleSubmit(e, time) {
     e.preventDefault();
     this.props.setTime(time);
+    this.props.startCountdown();
   }
 
   handleInput(input) {

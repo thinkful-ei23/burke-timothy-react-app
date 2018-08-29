@@ -7,15 +7,30 @@ export default class App extends React.Component {
     super(props);
     this.state = { currentTime: 0 };
   }
+
   setTime(currentTime) {
     this.setState({ currentTime });
   }
 
+  countDown() {
+    const currentTime = (() => this.state.currentTime);
+    while (currentTime > 0) {
+        setInterval(() => {
+          console.log('setting new time');
+          let newCurrentTime = this.state.currentTime - 1;
+          this.setState({
+            currentTime: newCurrentTime >= 0 ? newCurrentTime : 0
+          });
+        }, 1000)
+      }
+  }
+
   render() {
+
     return (
       <div>
         <Timer currentTime={this.state.currentTime} />
-        <Input setTime={currentTime => this.setTime(currentTime)} />
+        <Input startCountdown={() => this.countDown()} setTime={currentTime => this.setTime(currentTime)} />
       </div>
     );
   }
