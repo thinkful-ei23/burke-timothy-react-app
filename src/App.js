@@ -1,15 +1,21 @@
 import React from 'react';
 import Input from './Input';
 import Timer from './Timer';
+import Pause from './Pause';
+import Clear from './Clear';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { currentTime: 0 };
+    this.state = 
+    { 
+      currentTime: 0,
+      countDownStatus: 'stopped' 
+    };
   }
 
-  setTime(currentTime) {
-    this.setState({ currentTime });
+  setTime(currentTime, countDownStatus) {
+    this.setState({ currentTime, countDownStatus });
   }
 
   setCountdown() {
@@ -19,7 +25,7 @@ export default class App extends React.Component {
     );
   }
 
-  clearCountDown() {
+  pauseCountDown() {
     clearInterval(this.timerID);
   }
 
@@ -31,13 +37,15 @@ export default class App extends React.Component {
 
   render() {
     if (this.state.currentTime === 0) {
-      this.clearCountDown();
+      this.pauseCountDown();
     }
-     
+
     return (
       <div>
         <Timer currentTime={this.state.currentTime} />
         <Input setCountdown={() => this.setCountdown()} setTime={currentTime => this.setTime(currentTime)} />
+        <Pause setCountdown={() => this.setCountdown()} pauseCountdown={() => this.pauseCountDown()} />
+        <Clear pauseCountdown={() => this.pauseCountDown()} setTime={currentTime => this.setTime(currentTime)} />
       </div>
     );
   }

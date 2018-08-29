@@ -4,14 +4,14 @@ export default class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: ''
+      input: '',
     }
   }
 
   handleSubmit(e, time) {
     e.preventDefault();
-    this.props.setTime(time);
     this.props.setCountdown();
+    this.props.setTime(time, 'started');
   }
 
   handleInput(input) {
